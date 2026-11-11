@@ -257,12 +257,12 @@
     },
     {
      "name": "body",
-     "label": "Text (English)",
+     "label": "Description (English)",
      "widget": "markdown"
     },
     {
      "name": "body_bn",
-     "label": "Text (বাংলা)",
+     "label": "Description (বাংলা)",
      "widget": "markdown",
      "required": false
     }

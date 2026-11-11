@@ -70,7 +70,7 @@ A Bangla summary falls back to the English one.
    **Old price** is optional and shows crossed out.
 3. **Main photo:** click and upload. **More photos:** add extra angles for the product gallery.
 4. Optional: **Badge** (New, Sale or Bestseller), plus the page controls from section 2.
-5. Write the description in **Text (English)** and **Text (বাংলা)**.
+5. Write the product description in **Description (English)** and **Description (বাংলা)**.
 6. Click **Publish**. The site is live in about 1–2 minutes.
 
 To edit a product, click it in the list, change it and publish again.

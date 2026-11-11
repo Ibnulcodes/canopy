@@ -18,7 +18,7 @@ canonical:
 canonical_bn:
 draft: false
 ---
-Three doors, hanging rail, shelves and a lockable drawer. Solid wood frame. Edit this text in content/products/hana-3-door-wardrobe.md.
+Three doors, hanging rail, shelves and a lockable drawer. Solid wood frame.
 
 <!--bn-->
 তিন দরজা, হ্যাঙ্গিং রেল, তাক ও তালাযুক্ত ড্রয়ার। সলিড কাঠের ফ্রেম।

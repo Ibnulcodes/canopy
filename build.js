@@ -5,8 +5,8 @@ const readJSON=(p,fb)=>fs.existsSync(C(p))?JSON.parse(fs.readFileSync(C(p),'utf8
 const S=readJSON('site.json');
 const CATS=readJSON('categories.json',{cats:S.cats||[]}).cats||[];   // menu: rooms + their categories
 const SEC=readJSON('sections.json',{});                              // home / blog / works / areas landing pages
-const UI={en:{shop:'Shop now',price:'Tk',call:'Call',wa:'Order on WhatsApp',works:'Our Works',blog:'Blog',areas:'Areas',testi:'What our customers say',room:'Shop by room',trend:'Trending at Canopy',lang:'বাংলা',enq:'Send enquiry',name:'Your name',phone:'Phone',msg:'Message',visit:'Visit our showrooms',rel:'You may also like',none:'Products coming soon.'},
-bn:{shop:'এখনই কিনুন',price:'৳',call:'কল করুন',wa:'হোয়াটসঅ্যাপে অর্ডার',works:'আমাদের কাজ',blog:'ব্লগ',areas:'এলাকা',testi:'গ্রাহকদের মতামত',room:'রুম অনুযায়ী কিনুন',trend:'ক্যানোপিতে জনপ্রিয়',lang:'English',enq:'অনুসন্ধান পাঠান',name:'আপনার নাম',phone:'ফোন',msg:'বার্তা',visit:'আমাদের শোরুম',rel:'আপনার পছন্দ হতে পারে',none:'পণ্য শীঘ্রই আসছে।'}};
+const UI={en:{shop:'Shop now',price:'Tk',call:'Call',wa:'Order on WhatsApp',works:'Our Works',blog:'Blog',areas:'Areas',testi:'What our customers say',room:'Shop by room',trend:'Trending at Canopy',lang:'বাংলা',enq:'Send enquiry',name:'Your name',phone:'Phone',msg:'Message',visit:'Visit our showrooms',rel:'You may also like',description:'Description',none:'Products coming soon.'},
+bn:{shop:'এখনই কিনুন',price:'৳',call:'কল করুন',wa:'হোয়াটসঅ্যাপে অর্ডার',works:'আমাদের কাজ',blog:'ব্লগ',areas:'এলাকা',testi:'গ্রাহকদের মতামত',room:'রুম অনুযায়ী কিনুন',trend:'ক্যানোপিতে জনপ্রিয়',lang:'English',enq:'অনুসন্ধান পাঠান',name:'আপনার নাম',phone:'ফোন',msg:'বার্তা',visit:'আমাদের শোরুম',rel:'আপনার পছন্দ হতে পারে',description:'পণ্যের বিবরণ',none:'পণ্য শীঘ্রই আসছে।'}};
 const fmt=n=>Number(n).toLocaleString('en-IN');
 const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
 const md=s=>s.split(/\n{2,}/).map(b=>{b=b.trim();if(!b)return'';
@@ -51,7 +51,7 @@ const visible=p=>{const c=CATS.find(x=>x.slug==p.category),s=c?.subs?.find(x=>x.
 const u=(l,p)=>(l=='bn'?'/bn':'')+p;
 const imageList=o=>{const images=(o.images||'').split(',').map(s=>s.trim()).filter(Boolean);return images.length?images:o.image?[o.image]:[]};
 const img=(o,l)=>imageList(o).length?`<img src="${imageList(o)[0]}" alt="${esc(name(o,l))}" loading=lazy>`:`<div class=ph>${name(o,l)}</div>`;
-const gallery=(o,l)=>{const images=imageList(o);return images.length?`<div class=gallery>${images.map((src,i)=>`<img src="${src}" alt="${esc(name(o,l))}${images.length>1?' '+(i+1):''}" loading=lazy>`).join('')}</div>`:img(o,l)};
+const gallery=(o,l)=>{const images=imageList(o);return images.length?`<div class=gallery>${images.map((src,i)=>`<div class=gallery-item><img src="${src}" alt="${esc(name(o,l))}${images.length>1?' '+(i+1):''}" loading=lazy></div>`).join('')}</div>`:img(o,l)};
 
 const pages=[];
 // m = {title, desc, o}: title/desc are the automatic defaults, o is the item whose SEO fields can override them.
@@ -80,7 +80,7 @@ for(const l of['en','bn']){const t=UI[l],T=S.t[l];
   for(const s of c.subs)out(l,'/category/'+s.slug+'/',{title:s[l],desc:s[l]+' – '+S.brand,o:s,image:s.image},`<p class=crumb><a href="${u(l,'/category/'+c.slug+'/')}">${c[l]}</a> /</p><h1>${s[l]}</h1>${sub(s,l)}${grid(prods.filter(p=>p.sub==s.slug))}`)}
  // Products
  for(const p of prods){const n=f(p,'title',l),c=cats.find(x=>x.slug==p.category),s=allSubs.find(x=>x.slug==p.sub);
-  out(l,'/product/'+p.slug+'/',{title:n,desc:n+' – '+S.brand,o:p,image:imageList(p)[0]},`<div class=pd><div>${gallery(p,l)}</div><div>${c&&s?`<p class=crumb><a href="${u(l,'/category/'+c.slug+'/')}">${c[l]}</a> / <a href="${u(l,'/category/'+s.slug+'/')}">${s[l]}</a></p>`:''}<h1>${n}</h1>${sub(p,l)}<p class=pr>${t.price} ${fmt(p.price)}${p.old?` <s>${fmt(p.old)}</s>`:''}</p>${md(p.body[l])}<p><a class=btn href="tel:${S.phone}">${t.call}</a> <a class=btn href="https://wa.me/${S.whatsapp}?text=${encodeURIComponent(n)}">${t.wa}</a></p>${form(n)}</div></div><h2>${t.rel}</h2>${grid(prods.filter(x=>x.sub==p.sub&&x!=p).concat(prods.filter(x=>x.category==p.category&&x.sub!=p.sub)).slice(0,4))}`,{'@context':'https://schema.org','@type':'Product',name:n,image:imageList(p).map(x=>S.domain+x),offers:{'@type':'Offer',priceCurrency:'BDT',price:p.price}})}
+  out(l,'/product/'+p.slug+'/',{title:n,desc:n+' – '+S.brand,o:p,image:imageList(p)[0]},`<div class=pd><div>${gallery(p,l)}</div><div>${c&&s?`<p class=crumb><a href="${u(l,'/category/'+c.slug+'/')}">${c[l]}</a> / <a href="${u(l,'/category/'+s.slug+'/')}">${s[l]}</a></p>`:''}<h1>${n}</h1>${sub(p,l)}<p class=pr>${t.price} ${fmt(p.price)}${p.old?` <s>${fmt(p.old)}</s>`:''}</p>${p.body[l]?`<div class=product-description><h2>${t.description}</h2>${md(p.body[l])}</div>`:''}<p><a class=btn href="tel:${S.phone}">${t.call}</a> <a class=btn href="https://wa.me/${S.whatsapp}?text=${encodeURIComponent(n)}">${t.wa}</a></p>${form(n)}</div></div><h2>${t.rel}</h2>${grid(prods.filter(x=>x.sub==p.sub&&x!=p).concat(prods.filter(x=>x.category==p.category&&x.sub!=p.sub)).slice(0,4))}`,{'@context':'https://schema.org','@type':'Product',name:n,image:imageList(p).map(x=>S.domain+x),offers:{'@type':'Offer',priceCurrency:'BDT',price:p.price}})}
  // Works / Blog / Areas: landing page + one page per file
  for(const[d,a]of[['works',works],['blog',blog],['areas',areas]]){const so=sec(d);if(draft(so))continue;const h=g(so,'title',l)||t[d];
   out(l,'/'+d+'/',{title:h,desc:h+' – '+S.brand,o:so},`<h1>${h}</h1>${sub(so,l)}<div class=grid>${a.map(x=>`<a class=card href="${u(l,'/'+d+'/'+x.slug+'/')}">${img(x,l)}${d=='blog'&&fdate(x.date,l)?`<small>${fdate(x.date,l)}</small>`:''}<h3>${f(x,'title',l)}</h3><p>${f(x,'summary',l)}</p></a>`).join('')}</div>`);
@@ -96,6 +96,7 @@ const M=(name,label,widget,x={})=>({name,label,widget,...x});
 const OPT={required:false};
 const T2=(name,label,req=true)=>[M(name,label+' (English)','string',req?{}:OPT),M(name+'_bn',label+' (বাংলা)','string',OPT)];
 const BODY=[M('body','Text (English)','markdown'),M('body_bn','Text (বাংলা)','markdown',OPT)];
+const PRODUCT_BODY=[M('body','Description (English)','markdown'),M('body_bn','Description (বাংলা)','markdown',OPT)];
 const sel=a=>a.map(([value,label])=>({label,value}));
 const DATE=label=>M('date',label,'datetime',{date_format:'YYYY-MM-DD',time_format:false,format:'YYYY-MM-DD',...OPT});
 const SEO=(dateLabel='Last updated (YYYY-MM-DD)')=>[
@@ -120,7 +121,7 @@ const cms={
    M('category','Room','select',{options:sel(CATS.map(c=>[c.slug,c.en]))}),
    M('sub','Category','select',{options:sel(CATS.flatMap(c=>(c.subs||[]).map(x=>[x.slug,c.en+' > '+x.en])))}),
    M('price','Price (Tk)','number',{value_type:'int'}),M('old','Old price (Tk, shows crossed out)','number',{value_type:'int',...OPT}),
-   M('tag','Badge','select',{...OPT,options:['New','Sale','Bestseller']}),IMG,IMGS,...SEO(),...BODY],{summary:'{{title}} ({{sub}})',sortable_fields:['title','price','sub','date']}),
+   M('tag','Badge','select',{...OPT,options:['New','Sale','Bestseller']}),IMG,IMGS,...SEO(),...PRODUCT_BODY],{summary:'{{title}} ({{sub}})',sortable_fields:['title','price','sub','date']}),
   coll('blog','Blog posts',[...T2('title','Title'),IMG,...SEO('Publish date (YYYY-MM-DD)'),...BODY],{sortable_fields:['date','title']}),
   coll('works','Our Works',[...T2('title','Project name'),IMG,IMGS,...SEO(),...BODY]),
   coll('areas','Area pages (local SEO)',[...T2('title','Page title, e.g. Furniture Shop in Halishahar, Chattogram'),IMG,...SEO(),...BODY]),
