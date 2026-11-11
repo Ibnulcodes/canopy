@@ -3,6 +3,7 @@ title: Rowan Teak Queen Bed
 title_bn: রোয়ান সেগুন কুইন বেড
 category: bedroom
 sub: beds
+image: /images/bed-01.jpeg
 price: 64500
 tag: Bestseller
 summary: Rowan Teak Queen Bed by Canopy Furniture, Chattogram.
@@ -18,7 +19,7 @@ canonical:
 canonical_bn:
 draft: false
 ---
-Solid wood, hand-finished, 5-year structural warranty. Edit this text in content/products/rowan-teak-queen-bed.md.
+Vertical channel-tufted padded headboard, solid teak wood frame, smooth natural finish.
 
 <!--bn-->
-সলিড কাঠ, হাতে ফিনিশ করা, ৫ বছরের স্ট্রাকচারাল ওয়ারেন্টি।
+ভার্টিক্যাল চ্যানেল-টাফটেড প্যাডেড হেডবোর্ড, সলিড সেগুন কাঠের ফ্রেম, মসৃণ ন্যাচারাল ফিনিশ।

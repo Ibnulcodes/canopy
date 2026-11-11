@@ -2,7 +2,7 @@
 title: Canopy Wooden Armchair
 title_bn: করো উডেন আর্মচেয়ার
 category: dining
-sub: dining-tables
+sub: dining-chairs
 image: /images/chair-01.jpeg
 price: 14500
 tag: New

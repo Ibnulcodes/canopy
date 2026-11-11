@@ -131,6 +131,22 @@
           "canonical": "",
           "canonical_bn": "",
           "draft": false
+        },
+        {
+          "slug": "dressing-tables",
+          "en": "Dressing Tables",
+          "bn": "ড্রেসিং টেবিল",
+          "subtitle": "",
+          "subtitle_bn": "",
+          "seo_title": "",
+          "seo_title_bn": "",
+          "summary": "",
+          "summary_bn": "",
+          "date": "2026-11-07",
+          "index": true,
+          "canonical": "",
+          "canonical_bn": "",
+          "draft": false
         }
       ]
     },

@@ -1,6 +1,6 @@
 # Canopy site
 Static site for Canopy Furniture, Chattogram, in English and Bangla (`/bn/`).
-Build: `node build.js` (Node 18+, no dependencies) writes the site to `dist/`. Preview: `npx serve dist`. Deploys on Vercel (`vercel.json`).
+Build: `node build.js` (Node 18+, no dependencies) writes the site to `dist/`. Preview: `npm run serve` rebuilds the site and serves it locally. Deploys on Vercel (`vercel.json`).
 
 **How to edit products, categories, blog posts, photos and SEO: see [EDITING-GUIDE.md](EDITING-GUIDE.md).**
 

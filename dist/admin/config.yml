@@ -107,6 +107,10 @@
        "value": "wardrobes"
       },
       {
+       "label": "Bedroom > Dressing Tables",
+       "value": "dressing-tables"
+      },
+      {
        "label": "Dining > Dining Tables",
        "value": "dining-tables"
       },
